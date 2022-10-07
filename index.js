@@ -4,22 +4,25 @@
  * @Date: 2020-02-11 22:05:30
  */
 
-const cryptoSystem = require('./exp-utils/sole/cryptoSystem');
-const eventSystem = require('./exp-utils/sole/eventSystem');
-const fileSystem = require('./exp-utils/sole/fileSystem');
-const mysqlPool = require('./exp-utils/sole/mysqlPool');
-const redisPool = require('./exp-utils/sole/redisPool');
-const contain = require('./exp-utils/contain');
-const invoke = require('./exp-utils/invoke');
-const del = require('./exp-utils/delete');
-const methodsEnumerable = require('./exp-utils/methodsEnumerable');
-const propertiesEnumerable = require('./exp-utils/propertiesEnumerable');
-const sortByKey = require('./exp-utils/sortByKey');
-const number2String = require('./exp-utils/number2String');
-const rand = require('./exp-utils/rand');
-const lottery = require('./exp-utils/lottery');
-const shuffle = require('./exp-utils/shuffle');
+const cmdSystem = require('./src/sole/cmdSystem');
+const cryptoSystem = require('./src/sole/cryptoSystem');
+const eventSystem = require('./src/sole/eventSystem');
+const fileSystem = require('./src/sole/fileSystem');
+const mysqlPool = require('./src/sole/mysqlPool');
+const redisPool = require('./src/sole/redisPool');
+const contain = require('./src/contain');
+const invoke = require('./src/invoke');
+const del = require('./src/delete');
+const methodsEnumerable = require('./src/methodsEnumerable');
+const propertiesEnumerable = require('./src/propertiesEnumerable');
+const sortByKey = require('./src/sortByKey');
+const number2String = require('./src/number2String');
+const rand = require('./src/rand');
+const lottery = require('./src/lottery');
+const shuffle = require('./src/shuffle');
 
+// cmd system module
+module.exports.cmdSystem = cmdSystem;
 // crypto system module
 module.exports.cryptoSystem = cryptoSystem;
 // event system module

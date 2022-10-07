@@ -1,6 +1,6 @@
 {
     "name": "exp-utils",
-    "version": "2.2.4",
+    "version": "2.2.5",
     "private": false,
     "description": "A utility module which provides convenient functions for applications developed with Node.js",
     "main": "index.js",
@@ -17,6 +17,10 @@
         "email": "362279869@qq.com"
       }
     ],
+    "dependencies": {
+      "mysql": "^2.16.0",
+      "redis": "^2.8.0"
+    },
     "keywords": [
       "utils"
     ],

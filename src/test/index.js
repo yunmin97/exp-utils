@@ -10,7 +10,8 @@ const {
     cryptoSystem,
     fileSystem,
     mysqlPool,
-    redisPool
+    redisPool,
+    cmdSystem
 } = require('../../index');
 
 let crypto_test = function () {
@@ -185,4 +186,14 @@ let utils_test = function () {
     let acc = 'id' + utils.number2String(index, 6);
     console.log(acc);
 };
-
+let cmd_test = function () {
+    cmdSystem.add("-o", function(next) {
+        console.log("doing something...");
+        utils.invoke(next);
+    }, "output");
+    cmdSystem.add("-i", function(next) {
+        console.log("doing otherthing...");
+        utils.invoke(next, "next action");
+    }, "input");
+    cmdSystem.start(true);
+}

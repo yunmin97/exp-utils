@@ -1,8 +1,13 @@
+<!--
+ * @Author: yunmin
+ * @Email: 362279869@qq.com
+ * @Date: 2021-08-20 23:31:41
+-->
 A utility module which provides convenient functions for applications developed with [Node.js](https://nodejs.org/)      
         
 ## Installation      
 
-```
+```javascript
 npm install exp-utils
 ```
 
@@ -11,9 +16,30 @@ import exp-utils module
 const {
     utils,
     eventSystem,
-    cryptoSystem
+    cryptoSystem,
+    cmdSystem,
+    ...
 } = require('exp-utils');
 ```
+
+cmdSystem use case
+```javascript
+    // add command
+    cmdSystem.add("-i", function(next) {
+        console.log("doing otherthing, input...");
+        ...
+        utils.invoke(next, "next action: output");
+    });
+    cmdSystem.add("-o", function(next) {
+        console.log("doing something, outpout...");
+        ...
+        utils.invoke(next);
+    }, "output something");
+    ...
+    // start command
+    cmdSystem.start(true);
+```
+
 cryptoSystem use case
 ```javascript
 let word = '你好, hello, 안녕하세요, こんにちは...';
