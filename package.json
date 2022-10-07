@@ -1,15 +1,15 @@
 {
     "name": "exp-utils",
-    "version": "0.0.6",
+    "version": "2.2.4",
     "private": false,
-    "description": "a config data plugin for applications developed with nodejs",
+    "description": "A utility module which provides convenient functions for applications developed with Node.js",
     "main": "index.js",
     "scripts": {
-      "test": "node ./test/test.js"
+      "test": "node ./src/test/index.js"
     },
     "repository": {
       "type": "git",
-      "url": "https://github.com/yunmin97/data-plugin.git"
+      "url": "https://github.com/yunmin97/exp-utils.git"
     },
     "contributors": [
       {

@@ -1,6 +1,10 @@
-a utility module which provides convenient functions for applications developed with [Node.js](https://nodejs.org/)      
+A utility module which provides convenient functions for applications developed with [Node.js](https://nodejs.org/)      
         
-install: `npm install exp-utils`.
+## Installation      
+
+```
+npm install exp-utils
+```
 
 import exp-utils module
 ```javascript
