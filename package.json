@@ -1,0 +1,25 @@
+{
+    "name": "exp-utils",
+    "version": "0.0.6",
+    "private": false,
+    "description": "a config data plugin for applications developed with nodejs",
+    "main": "index.js",
+    "scripts": {
+      "test": "node ./test/test.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yunmin97/data-plugin.git"
+    },
+    "contributors": [
+      {
+        "name": "yunmin",
+        "email": "362279869@qq.com"
+      }
+    ],
+    "keywords": [
+      "utils"
+    ],
+    "author": "yunmin",
+    "license": "MIT"
+  }
