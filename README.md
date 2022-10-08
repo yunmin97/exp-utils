@@ -25,12 +25,12 @@ const {
 cmdSystem use case
 ```javascript
     // add command
-    cmdSystem.add("-i", function(next) {
+    cmdSystem.add("-i", function(params, next) {
         console.log("doing otherthing, input...");
         ...
         utils.invoke(next, "next action: output");
     });
-    cmdSystem.add("-o", function(next) {
+    cmdSystem.add("-o", function(params, next) {
         console.log("doing something, outpout...");
         ...
         utils.invoke(next);

@@ -19,8 +19,19 @@ function getInstructions(key, code) {
     return rt;
 }
 
+function getParams(line) {
+    let arr = line.split(" ");
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].length == 0) {
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+    return arr;
+}
+
 class Command {
-    constructor() {};
+    constructor() { };
 
     init(opts) {
         this.rl = readline.createInterface({
@@ -35,14 +46,15 @@ class Command {
     };
 
     onHandler(line) {
-        let k = line.trim();
+        let params = getParams(line.trim());
+        let k = params.splice(0, 1)[0];
         if (k === helpHey) {
             console.log(getInstructions());
             this.rl.prompt();
         }
         else {
             if (funcsMap.has(k)) {
-                invoke(funcsMap.get(k), this.onNext.bind(this));
+                invoke(funcsMap.get(k), params, this.onNext.bind(this));
             }
             else {
                 console.log("typing -h for help\n");

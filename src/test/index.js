@@ -187,12 +187,12 @@ let utils_test = function () {
     console.log(acc);
 };
 let cmd_test = function () {
-    cmdSystem.add("-o", function(next) {
-        console.log("doing something...");
+    cmdSystem.add("-o", function(params, next) {
+        console.log("doing something... ");
         utils.invoke(next);
     }, "output");
-    cmdSystem.add("-i", function(next) {
-        console.log("doing otherthing...");
+    cmdSystem.add("-i", function(params, next) {
+        console.log("doing otherthing... ");
         utils.invoke(next, "next action");
     }, "input");
     cmdSystem.start(true);
