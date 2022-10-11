@@ -3,21 +3,11 @@
  * @Email: 362279869@qq.com
  * @Date: 2022-10-07 18:47:58
  */
-
-const helpHey = "-h";
 const readline = require('readline');
 const invoke = require('../invoke').proxy;
 
 let tipsMap = new Map();
 let funcsMap = new Map();
-
-function getInstructions(key, code) {
-    let rt = "helpful tips:\n";
-    tipsMap.forEach((v, k) => {
-        rt += k + "         " + v + "\n";
-    });
-    return rt;
-}
 
 function getParams(line) {
     let arr = line.split(" ");
@@ -30,10 +20,34 @@ function getParams(line) {
     return arr;
 }
 
-class Command {
-    constructor() { };
+function getInstructions(key, code) {
+    let rt = "helpful tips:\n";
+    tipsMap.forEach((v, k) => {
+        rt += k + "         " + v + "\n";
+    });
+    return rt;
+}
 
-    init(opts) {
+function addCmd(cmd, cb, tips) {
+    let k = cmd.trim();
+    if (funcsMap.has(k)) {
+        console.warn(k + " has been added, please use other.");
+        return;
+    }
+    funcsMap.set(cmd, cb);
+    tipsMap.set(cmd, tips);
+}
+
+class Command {
+    constructor() {};
+
+    init(help, opts) {
+        addCmd("-h", this.onHelp.bind(this), "show help tips");
+        addCmd("exit", this.onQuit.bind(this), ""); 
+        if (help) {
+            console.log(getInstructions());
+        }     
+        //setup
         this.rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -42,24 +56,28 @@ class Command {
         let option = opts || {};
         //set default user
         this.user = option.user || "administrator";
-        this.onNext(option.tips);
+        this.onNext(option.tips);  
+    };
+
+    onHelp() {
+        console.log(getInstructions());
+        this.rl.prompt();
+    };
+
+    onQuit() {
+        console.log("bye.");
+        process.exit(0);
     };
 
     onHandler(line) {
         let params = getParams(line.trim());
         let k = params.splice(0, 1)[0];
-        if (k === helpHey) {
-            console.log(getInstructions());
-            this.rl.prompt();
+        if (funcsMap.has(k)) {
+            invoke(funcsMap.get(k), params, this.onNext.bind(this));
         }
         else {
-            if (funcsMap.has(k)) {
-                invoke(funcsMap.get(k), params, this.onNext.bind(this));
-            }
-            else {
-                console.log("typing -h for help\n");
-                this.rl.prompt();
-            }
+            console.log("typing -h for help.\n");
+            this.rl.prompt();
         }
     };
 
@@ -88,13 +106,7 @@ module.exports = {
      * @param {string} tips command tips, eg help
      */
     add: function (cmd, cb, tips) {
-        let k = cmd.trim();
-        if (k === helpHey) {
-            console.log(helpHey + " is reserved, please use other.");
-            return;
-        }
-        funcsMap.set(cmd, cb);
-        tipsMap.set(cmd, tips);
+        addCmd(cmd, cb, tips);
     },
 
     /**
@@ -115,13 +127,10 @@ module.exports = {
      */
     start: function (help, opts) {
         if (funcsMap.size <= 0) {
-            console.log("You must add a command config first.");
+            console.warn("You must add a command config first.");
         }
         else {
-            if (help) {
-                console.log(getInstructions());
-            }
-            command.init(opts);
+            command.init(help, opts);
         }
     }
 };
