@@ -20,6 +20,7 @@ const number2String = require('./src/number2String');
 const rand = require('./src/rand');
 const lottery = require('./src/lottery');
 const shuffle = require('./src/shuffle');
+const getFilenameFromDate = require('./src/getFilenameFromDate');
 
 // cmd system module
 module.exports.cmdSystem = cmdSystem;
@@ -55,4 +56,6 @@ module.exports.utils = {
     lottery: lottery.proxy,
     // shuffle an array easily
     shuffle: shuffle.proxy,
+    // get a filename for current date-time
+    getFilenameFromDate: getFilenameFromDate.proxy,
 };
